@@ -33,14 +33,19 @@ function App() {
     todoNameRef.current.value = null
   }
 
+  function handleClearTodos() {
+    const newTodos = todos.filter(todo => !todo.complete)
+    setTodos(newTodos)
+  }
+
   return (
     // The below fragment element allows you to return multiple elements in one rfc
     <>
       < TodoList todos={todos} toggleTodo={toggleTodo} />
       <input ref={todoNameRef} type="text" />
       <button onClick={handleAddTodo}>Add Todo</button>
-      <button>Clear Completed Todos</button>
-      <div>0 left to complete; Good Job!</div>
+      <button onClick={handleClearTodos}>Clear Completed Todos</button>
+      <div>{todos.filter(todo => !todo.complete).length} left to complete; Good Job!</div>
     </>
   )
 }
